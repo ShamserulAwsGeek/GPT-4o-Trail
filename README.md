@@ -1,6 +1,6 @@
 # GPT-4o-Trail
 Aws some of the Market place model to capture Gen AI model responses.
-##################################################################################################
+#####################################################################
 
 GPT-4o offers a shift in how AI models interact with multimodal inputs. By seamlessly combining text, images, and audio, GPT-4o provides a richer, more engaging user experience.
 
