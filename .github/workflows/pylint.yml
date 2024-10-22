@@ -45,10 +45,10 @@ jobs:
     lookup-only: # optional, default is false
     # Run the post step to save the cache even if another step before fails
     save-always: # optional, default is false
-
-                - name: Download a Build Artifact
-  uses: actions/download-artifact@v4.1.8
-  with:
+  
+    - name: Download a Build Artifact
+    - uses: actions/download-artifact@v4.1.8
+    with:
     # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
     name: # optional
     # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
