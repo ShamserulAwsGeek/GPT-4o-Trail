@@ -39,6 +39,7 @@ These elements helped create the dramatic and awe-inspiring structures typical o
         {
             "role": "user",
             "content": "What is the capital of France?",
+            "content": "Why France  is so famous?"
         }
     ],
     model="gpt-4o",
