@@ -40,6 +40,7 @@ These elements helped create the dramatic and awe-inspiring structures typical o
             "role": "user",
             "content": "What is the capital of France?",
             "content": "Why France  is so famous?"
+            "content": "Wen is the best time to visit France?"
         }
     ],
     model="gpt-4o",
