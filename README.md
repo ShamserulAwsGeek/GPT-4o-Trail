@@ -2,7 +2,7 @@
 Aws some of the Market place model to capture Gen AI model responses.
 #####################################################################
 
-GPT-4o offers a shift in how AI models interact with multimodal inputs. By seamlessly combining text, images, and audio, GPT-4o provides a richer, more engaging user experience.
+GPT-4o offers a shift in how AI models interact with multimodal inputs.By seamlessly combining text, images, and audio, GPT-4o provides a richer, more engaging user experience.
 
 Matching the intelligence of GPT-4 Turbo, it is remarkably more efficient, delivering text at twice the speed and at half the cost. Additionally, GPT-4o exhibits the highest vision performance and excels in non-English languages compared to previous OpenAI models.
 
