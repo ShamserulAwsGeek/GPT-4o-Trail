@@ -44,7 +44,7 @@ These elements helped create the dramatic and awe-inspiring structures typical o
         }
     ],
     model="gpt-4o",
-    temperature=0.79,
+    temperature=0.49,
     max_tokens=2340,
     top_p=1
 )
