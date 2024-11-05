@@ -27,7 +27,7 @@ jobs:
         pylint $(git ls-files '*.py')
                 - name: Cache
     - uses: actions/cache@v4.1.1
-      with:
+  with:
     # A list of files, directories, and wildcard patterns to cache and restore
     
   path:
@@ -63,8 +63,8 @@ jobs:
     run-id: # optional, default is ${{ github.run_id }}
 
                 - name: Upload a Build Artifact
-  uses: actions/upload-artifact@v4.4.3
-  with:
+   uses: actions/upload-artifact@v4.4.3
+with:
     # Artifact name
     name: # optional, default is artifact
     # A file, directory or wildcard pattern that describes what to upload
