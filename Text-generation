@@ -1,0 +1,8 @@
+import json
+import os
+import sys
+
+import boto3
+import botocore
+
+boto3_bedrock = boto3.client("bedrock-runtime")
