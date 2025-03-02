@@ -10,6 +10,7 @@ import botocore
 boto3_bedrock = boto3.client('bedrock-runtime')
 
 #Lab setup - create sample sales.csv data for this lab:
+#let's prepare an input for the Amazon Bedrock service to generate python program for our use-case.
 
 # create sales.csv file
 import csv
