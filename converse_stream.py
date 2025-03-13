@@ -20,7 +20,7 @@ def converse_stream(client, model_id, system_prompt, prompt, source, inference_c
   if guardrail_enabled:
     STREAM_PROCESSING_MODE = 'sync' # or 'async'
     guardrail_config = {
-      "guardrailIdentifier": guardrail_id,
+      "guardrailIdentifier": guardrail_id, #we can find this on aws bedrock console on safeguards-->guardrails
       "guardrailVersion": guardrail_version,
       "streamProcessingMode": STREAM_PROCESSING_MODE, # processing mode for streaming response
       "trace": "enabled"
