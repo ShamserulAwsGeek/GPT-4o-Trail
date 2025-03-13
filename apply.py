@@ -62,7 +62,7 @@ def apply(client, model_id, system_prompt, prompt, source, inference_config, gua
     # Evaluate output
     print("Evaluating output")
     response = bedrock_runtime.apply_guardrail(
-      guardrailIdentifier=guardrail_id,
+      guardrailIdentifier=guardrail_id, #Bedrock console--> safeguards--->guardrails
       guardrailVersion=guardrail_version,
       source='OUTPUT',  # or 'INPUT' depending on your use case
       content=content
