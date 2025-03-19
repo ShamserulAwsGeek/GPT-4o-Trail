@@ -31,7 +31,7 @@ def lambda_handler(event, context):
     "temperature": TEMPERATURE,
     "maxTokens": MAX_TOKENS
   }
-
+#try & catch attribute is added to make sure to parse the request so that it does not break or stop in between during any actions!
   try:
     if guardrail_mode == 'stream':
       converse_stream(
