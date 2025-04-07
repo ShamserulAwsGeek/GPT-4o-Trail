@@ -93,3 +93,77 @@ def apply(client, model_id, system_prompt, prompt, source, inference_config, gua
       output_text += content["text"]
     client.send_message(output_text, "")
     return
+
+
+
+import boto3
+from helpers.format import format_converse_message
+
+bedrock_runtime = boto3.client('bedrock-runtime')
+
+def evaluate_guardrail(bedrock_runtime, guardrail_id, guardrail_version, source, content):
+    print(f"Evaluating {source.lower()} with Guardrail")
+    response = bedrock_runtime.apply_guardrail(
+        guardrailIdentifier=guardrail_id,
+        guardrailVersion=guardrail_version,
+        source=source,
+        content=content
+    )
+    print(response)
+    return response
+
+def apply(client, model_id, system_prompt, prompt, source, inference_config, guardrail_id, guardrail_version):
+    guardrail_enabled = bool(guardrail_id and guardrail_version)
+
+    # Setup arguments to send to Bedrock Converse API
+    kwargs = {
+        "modelId": model_id,
+        "inferenceConfig": inference_config,
+        "messages": format_converse_message(guardrail_enabled, prompt, source)
+    }
+    if system_prompt:
+        kwargs["system"] = [{"text": system_prompt}]
+
+    # STEP 1: Evaluate input with Guardrail (if enabled)
+    if guardrail_enabled:
+        content = [{"text": {"text": prompt}}]
+        response = evaluate_guardrail(bedrock_runtime, guardrail_id, guardrail_version, 'INPUT', content)
+        
+        if response['action'] == 'GUARDRAIL_INTERVENED':
+            output_text = "".join(output["text"] for output in response['outputs'])
+            output_assessments = response['assessments']
+            print("Guardrail intervened.")
+            client.send_message(output_text, output_assessments)
+            return
+        else:
+            print("Guardrail did not intervene.")
+    
+    # STEP 2: Inference LLM with Converse API without attaching Guardrail
+    print("Getting output from LLM")
+    print(kwargs)
+    response = bedrock_runtime.converse(**kwargs)
+    print(response)
+    
+    # STEP 3: Evaluate the response with Guardrail (if enabled)
+    output_message = response["output"]["message"]
+
+    if guardrail_enabled:
+        content = [{"text": {"text": item["text"]}} for item in output_message["content"]]
+        response = evaluate_guardrail(bedrock_runtime, guardrail_id, guardrail_version, 'OUTPUT', content)
+        
+        output_text = ""
+        output_assessments = ""
+        
+        if response["action"] == "GUARDRAIL_INTERVENED":
+            output_text = "".join(output["text"] for output in response['outputs'])
+            output_assessments = response['assessments']
+            print("Guardrail intervened.")
+        else:
+            output_text = "".join(content["text"] for content in output_message["content"])
+            print("Guardrail did not intervene.")
+        
+        client.send_message(output_text, output_assessments)
+    else:
+        # Guardrail not enabled, send LLM response directly to client
+        output_text = "".join(content["text"] for content in output_message["content"])
+        client.send_message(output_text, "")
