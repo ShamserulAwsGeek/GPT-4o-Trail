@@ -157,7 +157,7 @@ def apply(client, model_id, system_prompt, prompt, source, inference_config, gua
         if response["action"] == "GUARDRAIL_INTERVENED":
             output_text = "".join(output["text"] for output in response['outputs'])
             output_assessments = response['assessments']
-            print("Guardrail intervened.")
+            print("Guardrail intervened")
         else:
             output_text = "".join(content["text"] for content in output_message["content"])
             print("Guardrail did not intervene.")
